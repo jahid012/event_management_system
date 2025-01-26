@@ -39,17 +39,17 @@ include 'admin/db_connect.php';
     }
 
     .event-list .banner {
-        width: calc(40%)
+        width: calc(30%)
     }
 
     .event-list .card-body {
-        width: calc(60%)
+        width: calc(70%)
     }
 
     .event-list .banner img {
         border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;
-        min-height: 50vh;
+        min-height: 30vh;
     }
 
     span.hightlight {
@@ -69,7 +69,7 @@ include 'admin/db_connect.php';
                         <span class="screen-reader-text">Search for...</span>
                         <input type="search" class="search-field" placeholder="Type something..." value="" name="s" title="" />
                     </label>
-                    <input type="submit" class="search-submit button" value="&#xf002" />
+                    <input type="submit" class="search-submit button" value="Search" />
                 </form>
                 <div class="col-md-12 mb-2 justify-content-center">
                 </div>
@@ -97,17 +97,22 @@ include 'admin/db_connect.php';
                 <?php endif; ?>
             </div>
             <div class="card-body">
-                <div class="row  align-items-center justify-content-center text-center h-100">
+                <div class="row  align-items-center justify-content-center p-4 h-100">
                     <div class="">
-                        <h3><b class="filter-txt"><?php echo ucwords($row['name']) ?></b></h3>
-                        <div><small>
+                        <h3>
+                            <b class="filter-txt"><?php echo ucwords($row['name']) ?></b>
+                        </h3>
+                        <div>
+                            <small>
                                 <p><b><i class="fa fa-calendar"></i> <?php echo date("F d, Y h:i A", strtotime($row['schedule'])) ?></b></p>
-                            </small></div>
+                            </small>
+                        </div>
                         <hr>
                         <larger class="truncate filter-txt"><?php echo strip_tags($desc) ?></larger>
-                        <br>
-                        <hr class="divider" style="max-width: calc(80%)">
-                        <button class="btn btn-primary float-right read_more" data-id="<?php echo $row['id'] ?>">Read More</button>
+                        <div class="mt-3">
+                            <button class="btn btn-primary float-right book-event" data-id="<?php echo $row['id'] ?>">Register Now</button>
+                        </div>
+
                     </div>
                 </div>
 
@@ -121,8 +126,8 @@ include 'admin/db_connect.php';
 
 
 <script>
-    $('.read_more').click(function() {
-        location.href = "index.php?page=view_event&id=" + $(this).attr('data-id')
+    $('.book-event').click(function(){
+        uni_modal("Submit Booking Request","booking.php?event_id="+$(this).attr('data-id'))
     })
     $('.banner img').click(function() {
         viewer_modal($(this).attr('src'))

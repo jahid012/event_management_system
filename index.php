@@ -232,7 +232,7 @@ input.search-submit {
   </div>
   <div id="preloader"></div>
         <footer class=" py-5">
-            <div class="container"><div class="small text-center text-muted">Copyright © 2020 - <?php echo $_SESSION['system']['name'] ?> | <a href="https://www.sourcecodester.com/" target="_blank">Sourcecodester</a></div></div>
+            <div class="container"><div class="small text-center text-muted">Copyright © 2025 by Jahid</div></div>
         </footer>
         
        <?php include('footer.php') ?>
