@@ -49,7 +49,6 @@
 				if(resp==1){
 					alert_toast("book Request Sent.",'success')
 						end_load()
-						uni_modal("","book_msg.php")
 
 				}
 			}

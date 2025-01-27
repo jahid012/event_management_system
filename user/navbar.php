@@ -4,7 +4,7 @@
 		text-indent:10px;
 	}
 	nav#sidebar{
-		background: url(assets/uploads/<?php echo $_SESSION['system']['cover_img'] ?>) !important
+		background: url(assets/uploads/1602641160_JSAV-multiscreen_3ddbdd40-38d9-4b64-9cf2-5d0ef356f29c.jpg) !important
 	}
 </style>
 
