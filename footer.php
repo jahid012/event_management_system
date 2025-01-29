@@ -106,7 +106,7 @@ window.alert_toast= function($msg = 'TEST',$bg = 'success'){
   }
   window.load_cart = function(){
     $.ajax({
-      url:'admin/ajax.php?action=get_cart_count',
+      url:'user/ajax.php?action=get_cart_count',
       success:function(resp){
         if(resp > -1){
           resp = resp > 0 ? resp : 0;
@@ -132,4 +132,4 @@ window.alert_toast= function($msg = 'TEST',$bg = 'success'){
         <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
         <!-- Core theme JS-->
 
-        <script src="js/scripts.js"></script>
+        <script src="assets/js/scripts.js"></script>

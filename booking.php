@@ -38,7 +38,7 @@
 		start_load()
 		$('#msg').html('')
 		$.ajax({
-			url:'admin/ajax.php?action=save_book',
+			url:'user/ajax.php?action=save_booking',
 			data: new FormData($(this)[0]),
 		    cache: false,
 		    contentType: false,

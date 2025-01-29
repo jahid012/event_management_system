@@ -2,7 +2,7 @@
 <html lang="en">
     <?php
     session_start();
-    include('admin/db_connect.php');
+    include('user/db_connect.php');
     ob_start();
         $query = $conn->query("SELECT * FROM system_settings limit 1")->fetch_array();
          foreach ($query as $key => $value) {
@@ -17,7 +17,7 @@
 
     <style>
     	header.masthead {
-		  background: url(admin/assets/uploads/1602641160_JSAV-multiscreen_3ddbdd40-38d9-4b64-9cf2-5d0ef356f29c.jpg);
+		  background: url(user/assets/uploads/1602641160_JSAV-multiscreen_3ddbdd40-38d9-4b64-9cf2-5d0ef356f29c.jpg);
 		  background-repeat: no-repeat;
 		  background-size: cover;
 		}

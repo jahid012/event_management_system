@@ -177,7 +177,7 @@ Class Action {
 			return 1;
 		}
 	}
-	function save_book(){
+	function save_booking(){
 		extract($_POST);
 		$data = " venue_id = '$venue_id' ";
 		$data .= ", name = '$name' ";

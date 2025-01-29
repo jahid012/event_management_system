@@ -24,23 +24,9 @@ if($action == 'delete_user'){
 	if($save)
 		echo $save;
 }
-if($action == 'signup'){
-	$save = $crud->signup();
-	if($save)
-		echo $save;
-}
-if($action == "save_settings"){
-	$save = $crud->save_settings();
-	if($save)
-		echo $save;
-}
-if($action == "save_venue"){
-	$save = $crud->save_venue();
-	if($save)
-		echo $save;
-}
-if($action == "save_book"){
-	$save = $crud->save_book();
+
+if($action == "save_booking"){
+	$save = $crud->save_booking();
 	if($save)
 		echo $save;
 }
@@ -60,11 +46,7 @@ if($action == "delete_register"){
 	if($save)
 		echo $save;
 }
-if($action == "delete_venue"){
-	$save = $crud->delete_venue();
-	if($save)
-		echo $save;
-}
+
 if($action == "update_order"){
 	$save = $crud->update_order();
 	if($save)

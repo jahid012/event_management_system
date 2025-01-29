@@ -14,10 +14,10 @@
 					            <select name="event_id" id="event_id" class="custom-select select2">
 					                <option></option>
 					                <?php 
-					                $event = $conn->query("SELECT * FROM events order by event asc");
+					                $event = $conn->query("SELECT e.* FROM events e order by e.id asc");
 					                while($row=$event->fetch_assoc()):
 					                ?>
-					                <option value="<?php echo $row['id'] ?>" <?php echo isset($event_id) && $event_id == $row['id'] ? 'selected' : '' ?>><?php echo ucwords($row['event']) ?></option>
+					                <option value="<?php echo $row['id'] ?>" <?php echo isset($event_id) && $event_id == $row['id'] ? 'selected' : '' ?>><?php echo ucwords($row['name']) ?></option>
 					            <?php endwhile; ?>
 					            </select>
 					        </div>

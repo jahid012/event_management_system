@@ -1,5 +1,5 @@
 <?php
-include 'admin/db_connect.php';
+include 'user/db_connect.php';
 ?>
 <style>
     #portfolio .img-fluid {
@@ -93,7 +93,7 @@ include 'admin/db_connect.php';
         <div class="card event-list" data-id="<?php echo $row['id'] ?>">
             <div class='banner'>
                 <?php if (!empty($row['banner'])): ?>
-                    <img src="admin/assets/uploads/<?php echo ($row['banner']) ?>" alt="">
+                    <img src="user/assets/uploads/<?php echo ($row['banner']) ?>" alt="">
                 <?php endif; ?>
             </div>
             <div class="card-body">
