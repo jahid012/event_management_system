@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 26, 2025 at 02:47 AM
+-- Generation Time: Jan 29, 2025 at 03:37 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.2.6
 
@@ -79,47 +79,6 @@ INSERT INTO `events` (`id`, `name`, `address`, `description`, `venue_name`, `sch
 -- --------------------------------------------------------
 
 --
--- Table structure for table `registered_attendees`
---
-
-CREATE TABLE `registered_attendees` (
-  `id` int NOT NULL,
-  `event_id` int NOT NULL,
-  `name` text NOT NULL,
-  `address` text NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `contact` varchar(100) NOT NULL,
-  `duration` varchar(100) NOT NULL,
-  `datetime` datetime NOT NULL,
-  `payment_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0=pending,1=confirmed,2=canceled',
-  `attendance_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0=not attended, 1= attended, 2=late attended'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `system_settings`
---
-
-CREATE TABLE `system_settings` (
-  `id` int NOT NULL,
-  `name` text NOT NULL,
-  `email` varchar(200) NOT NULL,
-  `contact` varchar(20) NOT NULL,
-  `cover_img` text NOT NULL,
-  `about_content` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `system_settings`
---
-
-INSERT INTO `system_settings` (`id`, `name`, `email`, `contact`, `cover_img`, `about_content`) VALUES
-(1, 'Event Management System', 'info@sample.comm', '+6948 8542 623', '1602641160_JSAV-multiscreen_3ddbdd40-38d9-4b64-9cf2-5d0ef356f29c.jpg', '&lt;p style=&quot;text-align: center; background: transparent; position: relative;&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: &amp;quot;Open Sans&amp;quot;, Arial, sans-serif; font-weight: 400; text-align: justify;&quot;&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center; background: transparent; position: relative;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center; background: transparent; position: relative;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `users`
 --
 
@@ -160,12 +119,6 @@ ALTER TABLE `events`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `system_settings`
---
-ALTER TABLE `system_settings`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -188,12 +141,6 @@ ALTER TABLE `audience`
 --
 ALTER TABLE `events`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `system_settings`
---
-ALTER TABLE `system_settings`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
