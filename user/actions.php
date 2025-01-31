@@ -73,9 +73,6 @@ Class Actions {
 		}
 	}
 
-
-
-
 	function save_booking(){
 		extract($_POST);
 		$data = " event_id = '$event_id' ";
