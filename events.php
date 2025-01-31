@@ -1,65 +1,6 @@
 <?php
 include 'user/db_connect.php';
 ?>
-<style>
-    #portfolio .img-fluid {
-        width: calc(100%);
-        height: 30vh;
-        z-index: -1;
-        position: relative;
-        padding: 1em;
-    }
-
-    .event-list {
-        cursor: pointer;
-    }
-
-    span.hightlight {
-        background: yellow;
-    }
-
-    .banner {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 26vh;
-        width: calc(30%);
-    }
-
-    .banner img {
-        width: calc(100%);
-        height: calc(100%);
-        cursor: pointer;
-    }
-
-    .event-list {
-        cursor: pointer;
-        border: unset;
-        flex-direction: inherit;
-    }
-
-    .event-list .banner {
-        width: calc(30%)
-    }
-
-    .event-list .card-body {
-        width: calc(70%)
-    }
-
-    .event-list .banner img {
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
-        min-height: 30vh;
-    }
-
-    span.hightlight {
-        background: yellow;
-    }
-
-    .banner {
-        min-height: calc(100%)
-    }
-</style>
 <header class="masthead">
     <div class="container-fluid h-100">
         <div class="row h-100 align-items-center justify-content-center text-center">

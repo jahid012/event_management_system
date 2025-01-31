@@ -1,7 +1,7 @@
 <?php
 session_start();
 ini_set('display_errors', 1);
-Class Action {
+Class Actions {
 	private $db;
 
 	public function __construct() {
