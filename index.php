@@ -3,21 +3,12 @@
     <?php
     session_start();
     include('user/db_connect.php');
-    ob_start();
-        $query = $conn->query("SELECT * FROM system_settings limit 1")->fetch_array();
-         foreach ($query as $key => $value) {
-          if(!is_numeric($key))
-            $_SESSION['system'][$key] = $value;
-        }
-    ob_end_flush();
+
     include('header.php');
-
-	
     ?>
-
     <style>
     	header.masthead {
-		  background: url(user/assets/uploads/1602641160_JSAV-multiscreen_3ddbdd40-38d9-4b64-9cf2-5d0ef356f29c.jpg);
+		  background: url(assets/uploads/1602641160_JSAV-multiscreen_3ddbdd40-38d9-4b64-9cf2-5d0ef356f29c.jpg);
 		  background-repeat: no-repeat;
 		  background-size: cover;
 		}

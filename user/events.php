@@ -43,7 +43,7 @@
 							<tbody>
 								<?php 
 								$i = 1;
-								$events = $conn->query("SELECT e.* FROM events e order by e.id asc");
+								$events = $conn->query("SELECT * FROM events where user_id = ".$_SESSION['login_id']." order by id asc");
 								while($row=$events->fetch_assoc()):
 									$trans = get_html_translation_table(HTML_ENTITIES,ENT_QUOTES);
 									unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
@@ -96,7 +96,7 @@
 	}
 	img{
 		max-width:100px;
-		max-height: :150px;
+		max-height:150px;
 	}
 </style>
 <script>

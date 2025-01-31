@@ -3,14 +3,6 @@
 <?php
 session_start();
 include('./db_connect.php');
-ob_start();
-if (!isset($_SESSION['system'])) {
-    $system = $conn->query("SELECT * FROM system_settings limit 1")->fetch_array();
-    foreach ($system as $k => $v) {
-        $_SESSION['system'][$k] = $v;
-    }
-}
-ob_end_flush();
 ?>
 
 <head>
@@ -67,7 +59,7 @@ ob_end_flush();
         </div>
     </section>
 
-    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
 
 
 </body>
@@ -89,7 +81,7 @@ ob_end_flush();
                 $('#register-form button[type="submit"]').removeAttr('disabled').html('Register');
 
                 if (resp == 1) {
-                    location.href = 'index.php?page=home';
+                    location.href = 'index.php?page=dashboard';
                 } else if (resp == 2) {
 
                     $('#register-form').prepend('<div class="alert alert-danger">Email or Phone already Exists.</div>')

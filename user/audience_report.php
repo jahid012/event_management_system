@@ -10,25 +10,25 @@
 					<form action="" id="filter">
 						<div class="row form-group">
 							<div class="col-md-4">
-					            <label for="" class="control-label">Event</label>
-					            <select name="event_id" id="event_id" class="custom-select select2">
-					                <option></option>
-					                <?php 
-					                $event = $conn->query("SELECT e.* FROM events e order by e.id asc");
-					                while($row=$event->fetch_assoc()):
-					                ?>
-					                <option value="<?php echo $row['id'] ?>" <?php echo isset($event_id) && $event_id == $row['id'] ? 'selected' : '' ?>><?php echo ucwords($row['name']) ?></option>
-					            <?php endwhile; ?>
-					            </select>
-					        </div>
+								<label for="" class="control-label">Event</label>
+								<select name="event_id" id="event_id" class="custom-select select2">
+									<option></option>
+									<?php
+									$event = $conn->query("SELECT * FROM events where user_id = ".$_SESSION['login_id']." order by id asc");
+									while ($row = $event->fetch_assoc()):
+									?>
+										<option value="<?php echo $row['id'] ?>" <?php echo isset($event_id) && $event_id == $row['id'] ? 'selected' : '' ?>><?php echo ucwords($row['name']) ?></option>
+									<?php endwhile; ?>
+								</select>
+							</div>
 							<div class="col-md-2">
-					            <label for="" class="control-label">&nbsp;</label>
-					            <button class="btn-primary btn-sm btn-block col-sm-12">Filter</button>
-					        </div>
-					        <div class="col-md-2">
-					            <label for="" class="control-label">&nbsp;</label>
-					            <button class="btn-success btn-sm btn-block col-sm-12" id="print" type="button"><i class="fa fa-print"></i> Print</button>
-					        </div>
+								<label for="" class="control-label">&nbsp;</label>
+								<button class="btn-primary btn-sm btn-block col-sm-12">Filter</button>
+							</div>
+							<div class="col-md-2">
+								<label for="" class="control-label">&nbsp;</label>
+								<button class="btn-primary btn-sm btn-block col-sm-12" id="csv-export" type="button"><i class="fa fa-file"></i> Export in CSV</button>
+							</div>
 						</div>
 					</form>
 					<hr>
@@ -38,17 +38,21 @@
 							<hr>
 							<p class="">Event: <span id="ename"></span></p>
 							<p class="">Venue: <span id="evenue"></span></p>
-						</div>	
+						</div>
 						<table class="table table-bordered">
 							<thead>
 								<th class="text-center">#</th>
 								<th class="text-center">Name</th>
 								<th class="text-center">Email</th>
-								<th class="text-center">Contact</th>
-								<th class="text-center">Payment Status</th>
+								<th class="text-center">Phone</th>
+								<th class="text-center">Address</th>
 							</thead>
 							<tbody>
-								<tr><th colspan="5"><center>Select Event First.</center></th></tr>
+								<tr>
+									<th colspan="5">
+										<center>Select Event First.</center>
+									</th>
+								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -58,78 +62,119 @@
 	</div>
 </div>
 <style type="text/css">
-	#onPrint{
+	#onPrint {
 		display: none;
 	}
 </style>
 <noscript>
 	<style>
-		table{
-			width:100%;
+		table {
+			width: 100%;
 			border-collapse: collapse;
 		}
-		tr, td, th{
+
+		tr,
+		td,
+		th {
 			border: 1px solid black;
 		}
-		.text-center{
-			text-align:center;
+
+		.text-center {
+			text-align: center;
 		}
-		p{
+
+		p {
 			font-weight: 600
 		}
 	</style>
-	
+
 </noscript>
 <script>
-	$('#filter').submit(function(e){
+	$('#filter').submit(function(e) {
 		e.preventDefault()
 		start_load()
 		$.ajax({
-			url:'ajax.php?action=get_audience_report',
-			method:'POST',
-			data:{event_id:$('#event_id').val()},
-			success:function(resp){
-				if(resp){
+			url: 'ajax.php?action=get_audience_report',
+			method: 'POST',
+			data: {
+				event_id: $('#event_id').val()
+			},
+			success: function(resp) {
+				if (resp) {
 					resp = JSON.parse(resp)
-					if(!!resp.event){
+					if (!!resp.event) {
 						$('#ename').html(resp.event.event)
 						$('#evenue').html(resp.event.venue)
 					}
-					if(!!resp.data && Object.keys(resp.data).length > 0){
+					if (!!resp.data && Object.keys(resp.data).length > 0) {
 						$('table tbody').html('')
-							var i = 1;
-						Object.keys(resp.data).map(k=>{
+						var i = 1;
+						console.log(resp.data);
+						Object.keys(resp.data).map(k => {
 							var tr = $('<tr class="item"></tr>')
-							tr.append('<td class="text-center">'+(i++)+'</td>')
-							tr.append('<td class="">'+resp.data[k].name+'</td>')
-							tr.append('<td class="">'+resp.data[k].email+'</td>')
-							tr.append('<td class="">'+resp.data[k].contact+'</td>')
-							tr.append('<td class="">'+resp.data[k].pstatus+'</td>')
-						$('table tbody').append(tr)
+							tr.append('<td class="text-center">' + (i++) + '</td>')
+							tr.append('<td class="">' + resp.data[k].name + '</td>')
+							tr.append('<td class="">' + resp.data[k].email + '</td>')
+							tr.append('<td class="">' + resp.data[k].phone + '</td>')
+							tr.append('<td class="">' + resp.data[k].address + '</td>')
+							$('table tbody').append(tr)
 						})
-						
-					}else{
+
+					} else {
 						$('table tbody').html('<tr><th colspan="5"><center>No Data.</center></th></tr>')
 					}
 				}
 			},
-			complete:function(){
+			complete: function() {
 				end_load()
 			}
 		})
 	})
-	$('#print').click(function(){
-		if($('table tbody').find('.item').length <= 0){
-			alert_toast("No Data to Print",'warning')
-			return false;
-		}
-		var nw= window.open("","_blank","width=900,heigth=600")
-		nw.document.write($('noscript').html())
-		nw.document.write($('#printable').html())
-		nw.document.close()
-		nw.print()
-		setTimeout(function(){
-			nw.close()
-		},700)
+
+	$('#csv-export').click(function() {
+
+		start_load()
+		$.ajax({
+			url: 'ajax.php?action=download_audience_report',
+			method: 'POST',
+			data: {
+				event_id: $('#event_id').val()
+			},
+			success: function(response) {
+				if (response) {
+
+					var blob = new Blob([response], {
+						type: "text/csv"
+					});
+					var link = document.createElement("a");
+					var name = formatDate() + "_audience_report.csv";
+
+					link.href = URL.createObjectURL(blob);
+					link.download = name;
+					link.click();
+				}
+			},
+			complete: function() {
+				end_load()
+			}
+		})
 	})
+
+	function formatDate(date = new Date()) {
+		let {
+			day,
+			month,
+			year
+		} = new Intl.DateTimeFormat('en', {
+			day: '2-digit',
+			month: 'short',
+			year: 'numeric'
+		}).formatToParts(date).reduce((acc, part) => {
+			if (part.type != 'literal') {
+				acc[part.type] = part.value;
+			}
+			return acc;
+		}, Object.create(null));
+		return `${day}_${month}_${year}`;
+	}
 </script>

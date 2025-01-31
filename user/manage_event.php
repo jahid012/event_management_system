@@ -205,7 +205,7 @@ img#banner-field{
 							  	<?php 
 							  		$images = array();
 							  		if(isset($id)){
-							  			$fpath = 'assets/uploads/event_'.$id;
+							  			$fpath = '../assets/uploads/event_'.$id;
 							  			if(is_dir($fpath))
 							  			$images= scandir($fpath);
 							  		}

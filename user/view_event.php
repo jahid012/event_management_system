@@ -80,7 +80,7 @@ foreach($qry->fetch_array() as $k => $val){
 						<?php 
 					  		$images = array();
 					  		if(isset($id)){
-					  			$fpath = 'assets/uploads/event_'.$id;
+					  			$fpath = '../assets/uploads/event_'.$id;
 					  			$images= scandir($fpath);
 					  		}
 					  		$i = 1;

@@ -41,5 +41,4 @@
   $(window).scroll(navbarCollapse);
 
 
-
 })(jQuery);

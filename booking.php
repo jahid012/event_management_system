@@ -1,7 +1,7 @@
 <div class="container-fluid">
 	<form action="" id="manage-book">
 		<input type="hidden" name="id" value="<?php echo isset($id) ? $id :'' ?>">
-		<input type="hidden" name="venue_id" value="<?php echo isset($_GET['venue_id']) ? $_GET['venue_id'] :'' ?>">
+		<input type="hidden" name="event_id" value="<?php echo isset($_GET['event_id']) ? $_GET['event_id'] :'' ?>">
 		<div class="form-group">
 			<label for="" class="control-label">Full Name</label>
 			<input type="text" class="form-control" name="name"  value="<?php echo isset($name) ? $name :'' ?>" required>
@@ -15,16 +15,8 @@
 			<input type="email" class="form-control" name="email"  value="<?php echo isset($email) ? $email :'' ?>" required>
 		</div>
 		<div class="form-group">
-			<label for="" class="control-label">Contact #</label>
-			<input type="text" class="form-control" name="contact"  value="<?php echo isset($contact) ? $contact :'' ?>" required>
-		</div>
-		<div class="form-group">
-			<label for="" class="control-label">Duration</label>
-			<input type="text" class="form-control" name="duration"  value="<?php echo isset($duration) ? $duration :'' ?>" required>
-		</div>
-		<div class="form-group">
-			<label for="" class="control-label">Desired Event Schedule</label>
-			<input type="text" class="form-control datetimepicker" name="schedule"  value="<?php echo isset($schedule) ? $schedule :'' ?>" required>
+			<label for="" class="control-label">Phone #</label>
+			<input type="text" class="form-control" name="phone"  value="<?php echo isset($phone) ? $phone :'' ?>" required>
 		</div>
 	</form>
 </div>
@@ -47,9 +39,9 @@
 		    type: 'POST',
 			success:function(resp){
 				if(resp==1){
-					alert_toast("book Request Sent.",'success')
-						end_load()
-
+					alert_toast("Booking Request Sent Successfully.",'success')
+					end_load()
+					$("#uni_modal").modal('toggle');
 				}
 			}
 		})

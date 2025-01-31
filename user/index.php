@@ -6,12 +6,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title><?php echo isset($_SESSION['system']['name']) ? $_SESSION['system']['name'] : '' ?></title>
+  <title>Event Management System</title>
  	
 
 <?php
   if(!isset($_SESSION['login_id']))
-    header('location:login.php');
+    header('location:../index.php');
  include('./header.php'); 
  ?>
 
@@ -66,14 +66,13 @@
     </div>
   </div>
   <main id="view-panel" >
-      <?php $page = isset($_GET['page']) ? $_GET['page'] :'home'; ?>
+      <?php $page = isset($_GET['page']) ? $_GET['page'] :'dashboard'; ?>
   	<?php include $page.'.php' ?>
   	
 
   </main>
 
   <div id="preloader"></div>
-  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
 <div class="modal fade" id="confirm_modal" role='dialog'>
     <div class="modal-dialog modal-md" role="document">

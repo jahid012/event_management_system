@@ -79,7 +79,7 @@ include 'user/db_connect.php';
     </div>
 </header>
 <div class="container mt-3 pt-2">
-    <h4 class="text-center">Upcoming Events</h4>
+    <h4 class="text-center">Latest Events</h4>
     <hr class="divider">
     <?php
     $event = $conn->query("SELECT e.* FROM events e where date_format(e.schedule,'%Y-%m%-d') >= '" . date('Y-m-d') . "' and e.type = 1 order by unix_timestamp(e.schedule) asc");
@@ -93,7 +93,7 @@ include 'user/db_connect.php';
         <div class="card event-list" data-id="<?php echo $row['id'] ?>">
             <div class='banner'>
                 <?php if (!empty($row['banner'])): ?>
-                    <img src="user/assets/uploads/<?php echo ($row['banner']) ?>" alt="">
+                    <img src="assets/uploads/<?php echo ($row['banner']) ?>" alt="">
                 <?php endif; ?>
             </div>
             <div class="card-body">

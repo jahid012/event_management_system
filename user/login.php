@@ -3,14 +3,6 @@
 <?php 
 session_start();
 include('./db_connect.php');
-ob_start();
-if(!isset($_SESSION['system'])){
-	$system = $conn->query("SELECT * FROM system_settings limit 1")->fetch_array();
-	foreach($system as $k => $v){
-		$_SESSION['system'][$k] = $v;
-	}
-}
-ob_end_flush();
 ?>
 <head>
   <meta charset="utf-8">
@@ -22,7 +14,7 @@ ob_end_flush();
 <?php include('./header.php'); ?>
 <?php 
 if(isset($_SESSION['login_id']))
-header("location:index.php?page=home");
+header("location:index.php?page=dashboard");
 
 ?>
 
@@ -56,8 +48,6 @@ header("location:index.php?page=home");
   </div>
 </section>
 
-  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
-
 
 </body>
 <script>
@@ -77,9 +67,7 @@ header("location:index.php?page=home");
 			},
 			success:function(resp){
 				if(resp == 1){
-					location.href ='index.php?page=home';
-				}else if(resp == 2){
-					location.href ='voting.php';
+					location.href ='index.php?page=dashboard';
 				}else{
 					$('#login-form').prepend('<div class="alert alert-danger">Username or password is incorrect.</div>')
 					$('#login-form button[type="button"]').removeAttr('disabled').html('Login');
