@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 29, 2025 at 03:37 AM
+-- Generation Time: Jan 31, 2025 at 08:42 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.2.6
 
@@ -29,11 +29,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `audience` (
   `id` int NOT NULL,
+  `event_id` int NOT NULL,
   `name` text NOT NULL,
-  `contact` varchar(50) NOT NULL,
+  `phone` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `email` varchar(100) NOT NULL,
   `address` text NOT NULL,
-  `event_id` int NOT NULL,
   `payment_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0= pending, 1 =Paid',
   `attendance_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1= present',
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 = for verification,  1 = confirmed,2= declined',
@@ -44,8 +44,10 @@ CREATE TABLE `audience` (
 -- Dumping data for table `audience`
 --
 
-INSERT INTO `audience` (`id`, `name`, `contact`, `email`, `address`, `event_id`, `payment_status`, `attendance_status`, `status`, `date_created`) VALUES
-(2, 'George Wilson', '+18456-5455-55', 'gwilson@sample.com', 'Sample', 1, 1, 0, 1, '0000-00-00 00:00:00');
+INSERT INTO `audience` (`id`, `event_id`, `name`, `phone`, `email`, `address`, `payment_status`, `attendance_status`, `status`, `date_created`) VALUES
+(2, 6, 'George Wilson', '+18456-5455-55', 'gwilson@sample.com', 'Sample', 1, 0, 1, '0000-00-00 00:00:00'),
+(3, 5, 'Mr, Jahid', '01847646846', 'demo@gmail.com', 'Dhaka Bangladesh', 0, 0, 0, '2025-01-31 11:05:57'),
+(4, 5, 'Jahid Hadsan', '2321123123', 'dedmo@gmail.com', 'demod', 0, 0, 0, '2025-01-31 11:14:58');
 
 -- --------------------------------------------------------
 
@@ -55,6 +57,7 @@ INSERT INTO `audience` (`id`, `name`, `contact`, `email`, `address`, `event_id`,
 
 CREATE TABLE `events` (
   `id` int NOT NULL,
+  `user_id` int NOT NULL,
   `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `address` text NOT NULL,
   `description` text NOT NULL,
@@ -72,9 +75,9 @@ CREATE TABLE `events` (
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`id`, `name`, `address`, `description`, `venue_name`, `schedule`, `type`, `audience_capacity`, `payment_type`, `attendance_fees`, `banner`, `date_created`) VALUES
-(5, 'Science Fair', 'Motijheel, Dhaka', 'when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &amp;#x2019;Content here, content here&amp;#x2019;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &amp;#x2019;lorem ipsum&amp;#x2019; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like', 'Mitford stedium', '2025-01-31 12:01:00', 1, 150, 1, 300, '1602647220_images3.jpg', '2025-01-24 12:03:28'),
-(6, 'demo demo', 'Rajshahi, Khulna, Barishal', '&lt;span style=&quot;color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; text-align: justify;&quot;&gt;or randomised words which don&rsquo;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&rsquo;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a h&lt;/span&gt;', 'MilonMala Stedium', '2025-05-03 18:00:00', 1, 50, 2, 500, '1737709800_celebration-hall-with-full-guests.jpg', '2025-01-24 14:55:37');
+INSERT INTO `events` (`id`, `user_id`, `name`, `address`, `description`, `venue_name`, `schedule`, `type`, `audience_capacity`, `payment_type`, `attendance_fees`, `banner`, `date_created`) VALUES
+(5, 1, 'Science Fair', 'Motijheel, Dhaka', 'when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &amp;#x2019;Content here, content here&amp;#x2019;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &amp;#x2019;lorem ipsum&amp;#x2019; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like', 'Mitford stedium', '2025-01-31 12:01:00', 1, 150, 1, 300, '1602647220_images3.jpg', '2025-01-24 12:03:28'),
+(6, 1, 'demo demo', 'Rajshahi, Khulna, Barishal', '&lt;span style=&quot;color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; text-align: justify;&quot;&gt;or randomised words which don&rsquo;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&rsquo;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a h&lt;/span&gt;', 'MilonMala Stedium', '2025-05-03 18:00:00', 1, 50, 2, 500, '1737709800_celebration-hall-with-full-guests.jpg', '2025-01-24 14:55:37');
 
 -- --------------------------------------------------------
 
@@ -134,7 +137,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `audience`
 --
 ALTER TABLE `audience`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `events`
