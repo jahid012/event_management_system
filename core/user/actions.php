@@ -58,7 +58,7 @@ class Actions
         foreach ($_SESSION as $key => $value) {
             unset($_SESSION[$key]);
         }
-        header("location:index.php");
+        header("location:../../");
     }
 
     // REGISTER
@@ -179,6 +179,7 @@ class Actions
     function save_event()
     {
         $id                = trim($_POST['id'] ?? '');
+        $user_id           = trim($_SESSION['login_id'] ?? '');
         $name              = trim($_POST['name'] ?? '');
         $venue_name        = trim($_POST['venue_name'] ?? '');
         $address           = trim($_POST['address'] ?? '');
@@ -201,10 +202,11 @@ class Actions
 
         // Insertion
         if (empty($id)) {
-            $stmt = $this->db->prepare("INSERT INTO events (name, venue_name, address, schedule, audience_capacity, payment_type, type, attendance_fees, description, banner) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssisssss", $name, $venue_name, $address, $schedule, $audience_capacity, $payment_type, $type, $attendance_fees, $description, $banner);
+            $stmt = $this->db->prepare("INSERT INTO events ( user_id, name, venue_name, address, schedule, audience_capacity, payment_type, type, attendance_fees, description, banner) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("issssisssss", $user_id, $name, $venue_name, $address, $schedule, $audience_capacity, $payment_type, $type, $attendance_fees, $description, $banner);
             $save = $stmt->execute();
             $stmt->close();
+
             if ($save) {
                 $id = $this->db->insert_id;
                 $this->handle_event_images($id);
@@ -222,7 +224,7 @@ class Actions
             if ($save) {
                 $this->handle_event_images($id);
             }
-        }
+        }   
         return $save ? 1 : 0;
     }
 

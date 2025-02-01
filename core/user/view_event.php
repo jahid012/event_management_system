@@ -1,7 +1,7 @@
 <?php include 'db_connect.php' ?>
 <?php
 if(isset($_GET['id'])){
-$qry = $conn->query("SELECT e.* FROM events e where e.id= ".$_GET['id']);
+$qry = $conn->query("SELECT * FROM events where id= ".$_GET['id']);
 foreach($qry->fetch_array() as $k => $val){
 	$$k=$val;
 }

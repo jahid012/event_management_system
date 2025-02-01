@@ -25,5 +25,5 @@ if (array_key_exists($route, $routes)) {
   include $routes[$route];
 } else {
   http_response_code(404);
-  include 'views/404.php'; // Load a custom 404 page
+  die('Page Not Found');
 }

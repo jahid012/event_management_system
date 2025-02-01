@@ -28,14 +28,7 @@ include('core/header.php');
   </nav>
 
   <?php
-  $allowed_pages = ['events', 'booking'];
-  $page = isset($_GET['page']) ? $_GET['page'] : 'events';
-
-  if (!in_array($page, $allowed_pages)) {
-    $page = '404';
-  }
-
-  include 'core/' . $page . '.php';
+  include 'core/events.php';
   ?>
 
 
