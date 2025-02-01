@@ -2,7 +2,7 @@
 session_start();
 ini_set('display_errors', 1);
 
-class UpdatedActions {
+class Actions {
     private $db;
 
     public function __construct() {

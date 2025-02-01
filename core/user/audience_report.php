@@ -94,7 +94,7 @@
 		e.preventDefault()
 		start_load()
 		$.ajax({
-			url: 'ajax.php?action=get_audience_report',
+			url: 'api?action=get_audience_report',
 			method: 'POST',
 			data: {
 				event_id: $('#event_id').val()
@@ -135,7 +135,7 @@
 
 		start_load()
 		$.ajax({
-			url: 'ajax.php?action=download_audience_report',
+			url: 'api?action=download_audience_report',
 			method: 'POST',
 			data: {
 				event_id: $('#event_id').val()

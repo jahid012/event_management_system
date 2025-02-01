@@ -14,7 +14,7 @@ include('./db_connect.php');
 <?php include('./header.php'); ?>
 <?php 
 if(isset($_SESSION['login_id']))
-header("location:index.php?page=dashboard");
+header("location:user/dashboard");
 
 ?>
 
@@ -57,7 +57,7 @@ header("location:index.php?page=dashboard");
 		if($(this).find('.alert-danger').length > 0 )
 			$(this).find('.alert-danger').remove();
 		$.ajax({
-			url:'ajax.php?action=login',
+			url:'api?action=login',
 			method:'POST',
 			data:$(this).serialize(),
 			error:err=>{
@@ -67,7 +67,7 @@ header("location:index.php?page=dashboard");
 			},
 			success:function(resp){
 				if(resp == 1){
-					location.href ='index.php?page=dashboard';
+					location.href ='/user/dashboard';
 				}else{
 					$('#login-form').prepend('<div class="alert alert-danger">Username or password is incorrect.</div>')
 					$('#login-form button[type="button"]').removeAttr('disabled').html('Login');

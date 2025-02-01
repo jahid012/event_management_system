@@ -34,7 +34,7 @@ Class Actions {
 		foreach ($_SESSION as $key => $value) {
 			unset($_SESSION[$key]);
 		}
-		header("location:index.php");
+		header("location:../../");
 	}
 
 	function register(){
@@ -141,7 +141,7 @@ Class Actions {
 			$save = $this->db->query("INSERT INTO events set ".$data);
 			if($save){
 				$id = $this->db->insert_id;
-				$folder = "../assets/uploads//event_".$id;
+				$folder = "../assets/uploads/event_".$id;
 				if(is_dir($folder)){
 					$files = scandir($folder);
 					foreach($files as $k =>$v){
@@ -164,7 +164,7 @@ Class Actions {
 		}else{
 			$save = $this->db->query("UPDATE events set ".$data." where id=".$id);
 			if($save){
-				$folder = "../assets/uploads//event_".$id;
+				$folder = "../../assets/uploads/event_".$id;
 				if(is_dir($folder)){
 					$files = scandir($folder);
 					foreach($files as $k =>$v){

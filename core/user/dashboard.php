@@ -105,7 +105,7 @@
         e.preventDefault()
         start_load()
         $.ajax({
-            url: 'ajax.php?action=save_track',
+            url: 'api?action=save_track',
             data: new FormData($(this)[0]),
             cache: false,
             contentType: false,
@@ -137,7 +137,7 @@
     function get_person() {
         start_load()
         $.ajax({
-            url: 'ajax.php?action=get_pdetails',
+            url: 'api?action=get_pdetails',
             method: "POST",
             data: {
                 tracking_id: $('#tracking_id').val()

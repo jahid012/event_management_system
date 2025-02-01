@@ -181,11 +181,11 @@ span.hightlight {
 }
 
 .event-list .banner {
-    width: calc(30%)
+    width: calc(35%)
 }
 
 .event-list .card-body {
-    width: calc(70%)
+    width: calc(65%)
 }
 
 .event-list .banner img {

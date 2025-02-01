@@ -2,9 +2,9 @@
 <html lang="en">
 <?php
 session_start();
-include('user/db_connect.php');
+include('core/user/db_connect.php');
 
-include('header.php');
+include('core/header.php');
 ?>
 
 <body id="page-top">
@@ -20,17 +20,22 @@ include('header.php');
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto my-2 my-lg-0">
           <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/">Home</a></li>
-          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=events">Events</a></li>
-          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="user/register.php">Register</a></li>
-          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="user/login.php">Login</a></li>
+          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="user/register">Register</a></li>
+          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="user/login">Login</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
   <?php
-  $page = isset($_GET['page']) ? $_GET['page'] : "events";
-  include $page . '.php';
+  $allowed_pages = ['events', 'booking'];
+  $page = isset($_GET['page']) ? $_GET['page'] : 'events';
+
+  if (!in_array($page, $allowed_pages)) {
+    $page = '404';
+  }
+
+  include 'core/' . $page . '.php';
   ?>
 
 
@@ -46,21 +51,6 @@ include('header.php');
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" id='confirm' onclick="">Continue</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="uni_modal" role='dialog'>
-    <div class="modal-dialog modal-md" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title"></h5>
-        </div>
-        <div class="modal-body">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" id='submit' onclick="$('#uni_modal form').submit()">Save</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
         </div>
       </div>
     </div>
@@ -94,7 +84,7 @@ include('header.php');
     </div>
   </footer>
 
-  <?php include('footer.php') ?>
+  <?php include('core/footer.php') ?>
 </body>
 
 <?php $conn->close() ?>

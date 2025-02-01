@@ -11,7 +11,7 @@
 
 <?php
   if(!isset($_SESSION['login_id']))
-    header('location:../index.php');
+    header('location:../../');
  include('./header.php'); 
  ?>
 
@@ -66,8 +66,21 @@
     </div>
   </div>
   <main id="view-panel" >
-      <?php $page = isset($_GET['page']) ? $_GET['page'] :'dashboard'; ?>
-  	<?php include $page.'.php' ?>
+  <?php
+
+$allowed_user_pages = ['events', 'dashboard', 'audience_report', 'view_event', 'manage_event','audience_report'];
+
+$current_url = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+
+$page = isset($current_url) ? $current_url : 'dashboard';
+
+// Validate and include user pages
+if (in_array($page, $allowed_user_pages) && file_exists($page . '.php')) {
+    include $page . '.php';
+} else {
+    include 'dashboard.php';
+}
+?>
   	
 
   </main>

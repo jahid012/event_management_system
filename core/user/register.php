@@ -15,7 +15,7 @@ include('./db_connect.php');
     <?php include('./header.php'); ?>
     <?php
     if (isset($_SESSION['register_id']))
-        header("location:index.php?page=home");
+        header("location:/user/home");
 
     ?>
 
@@ -70,7 +70,7 @@ include('./db_connect.php');
         if ($(this).find('.alert-danger').length > 0)
             $(this).find('.alert-danger').remove();
         $.ajax({
-            url: 'ajax.php?action=register',
+            url: 'api?action=register',
             method: 'POST',
             data: $(this).serialize(),
             error: err => {
@@ -81,7 +81,7 @@ include('./db_connect.php');
                 $('#register-form button[type="submit"]').removeAttr('disabled').html('Register');
 
                 if (resp == 1) {
-                    location.href = 'index.php?page=dashboard';
+                    location.href = '/user/dashboard';
                 } else if (resp == 2) {
 
                     $('#register-form').prepend('<div class="alert alert-danger">Email or Phone already Exists.</div>')

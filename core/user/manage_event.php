@@ -205,7 +205,7 @@ img#banner-field{
 							  	<?php 
 							  		$images = array();
 							  		if(isset($id)){
-							  			$fpath = '../assets/uploads/event_'.$id;
+							  			$fpath = '../../assets/uploads/event_'.$id;
 							  			if(is_dir($fpath))
 							  			$images= scandir($fpath);
 							  		}
@@ -261,7 +261,7 @@ img#banner-field{
 	//	start_load()
 		$('#msg').html('')
 		$.ajax({
-			url:'ajax.php?action=save_event',
+			url:'api?action=save_event',
 			data: new FormData($(this)[0]),
 		    cache: false,
 		    contentType: false,
@@ -272,7 +272,7 @@ img#banner-field{
 				if(resp==1){
 					alert_toast("Data successfully saved",'success')
 					setTimeout(function(){
-						location.href = "index.php?page=events"
+						location.href = "/user/events"
 					},1500)
 
 				}

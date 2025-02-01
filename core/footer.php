@@ -97,7 +97,7 @@
    }
    window.load_cart = function() {
      $.ajax({
-       url: 'user/ajax.php?action=get_cart_count',
+       url: 'user/api?action=get_cart_count',
        success: function(resp) {
          if (resp > -1) {
            resp = resp > 0 ? resp : 0;

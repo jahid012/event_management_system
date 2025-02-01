@@ -16,7 +16,7 @@
 				<div class="card">
 					<div class="card-header">
 						<b>List of Events</b>
-						<span class="float:right"><a class="btn btn-primary btn-block btn-sm col-sm-2 float-right" href="index.php?page=manage_event" id="new_event">
+						<span class="float:right"><a class="btn btn-primary btn-block btn-sm col-sm-2 float-right" href="/user/manage_event" id="new_event">
 					<i class="fa fa-plus"></i> New Entry
 				</a></span>
 					</div>
@@ -105,11 +105,11 @@
 	})
 	
 	$('.view_event').click(function(){
-		location.href ="index.php?page=view_event&id="+$(this).attr('data-id')
+		location.href ="/user/view_event?id="+$(this).attr('data-id')
 		
 	})
 	$('.edit_event').click(function(){
-		location.href ="index.php?page=manage_event&id="+$(this).attr('data-id')
+		location.href ="/user/manage_event?id="+$(this).attr('data-id')
 		
 	})
 	$('.delete_event').click(function(){
@@ -119,7 +119,7 @@
 	function delete_event($id){
 		start_load()
 		$.ajax({
-			url:'ajax.php?action=delete_event',
+			url:'api?action=delete_event',
 			method:'POST',
 			data:{id:$id},
 			success:function(resp){
