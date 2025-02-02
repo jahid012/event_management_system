@@ -2,7 +2,7 @@
 
 This project is a web-based event management system that allows users to create, manage, and view events, register attendees, and generate event reports.  It's built with Row PHP, HTML, CSS, and Bootstrap.
 
-**Live URL:** The Live URL is available at `https://event.chromesurfer.com`
+**Live URL:** The Live URL is available at `https://chromesurfer.net/`
 
 ## Testing Login Credentials
 
