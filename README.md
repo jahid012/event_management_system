@@ -41,7 +41,7 @@ This system provides a platform for managing events efficiently.  Users can crea
 
 ## Server requirements
 
-PHP Version avobe 7.4
+PHP Version above 7.4
 MySQL Version 5.7+ or MariaDB version 10.3+
 
 ```bash
