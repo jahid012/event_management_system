@@ -1,6 +1,6 @@
 # Event Management System
 
-This project allows users to create, manage, and view events, register attendees, and generate event reports.  It's built with Pure PHP, HTML, CSS, and Bootstrap.
+Sir my project allows users to create, manage, and view events, register attendees, and generate event reports.  It's built with Pure PHP, HTML, CSS, and Bootstrap.
 
 **Live URL:** The Live URL is available at `https://chromesurfer.net/`
 
@@ -30,17 +30,22 @@ This system provides a platform for managing events efficiently.  Users can crea
     ```
 
 2.  **Configure Database:**
-        ```
         Please create a database named `event_management` in your MySQL server.
-        Import the SQL file to your database. The file is located at `database` folder and
+        Import the SQL file to your database. The file is located at `database` folder in the source code after that
         Update the database credentials in the `core/user/db_connect.php` file
-        
-        ```
+
 
 3.  **Access the Application:**
     Please navigate to `http://localhost/` **(or the appropriate URL)** to open the project.
 
-Author
-**MD. Jahid Hasan Badhon**
-**+8801795891261**
-**jahid11.bgd@gmail.com**
+
+## Server requirements
+
+PHP Version avobe 7.4
+MySQL Version 5.7+ or MariaDB version 10.3+
+
+```bash
+MD. Jahid Hasan Badhon 
+Phone: +8801795891261 
+Email: jahid11.bgd@gmail.com
+```
