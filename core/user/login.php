@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<?php 
-session_start();
+<?php  session_start();
 include('./db_connect.php');
 ?>
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -70,7 +69,7 @@ header("location:user/dashboard");
 					location.href ='/user/dashboard';
 				}else{
 					$('#login-form').prepend('<div class="alert alert-danger">Username or password is incorrect.</div>')
-					$('#login-form button[type="button"]').removeAttr('disabled').html('Login');
+					$('#login-form button[type="submit"]').removeAttr('disabled').html('Login');
 				}
 			}
 		})

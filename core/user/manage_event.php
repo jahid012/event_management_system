@@ -258,7 +258,7 @@ img#banner-field{
 
 	$('#manage-event').submit(function(e){
 		e.preventDefault()
-	//	start_load()
+		start_load()
 		$('#msg').html('')
 		$.ajax({
 			url:'api?action=save_event',
@@ -273,13 +273,13 @@ img#banner-field{
 					alert_toast("Data successfully saved",'success')
 					setTimeout(function(){
 						location.href = "/user/events"
-					},1500)
+					},800)
 
 				}else{
 					alert_toast("Unexpected Error Occurred !",'warning')
 					setTimeout(function(){
 						location.href = "/user/events"
-					},1500)
+					},800)
 				}
 				
 			}
