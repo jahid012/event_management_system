@@ -128,12 +128,35 @@ class Actions
         $address  = trim($_POST['address'] ?? '');
         $email    = trim($_POST['email'] ?? '');
         $phone    = trim($_POST['phone'] ?? '');
-        $status   = isset($_POST['status']) ? trim($_POST['status']) : '';
+        $status   = isset($_POST['status']) ? trim($_POST['status']) : 1;
         $id       = trim($_POST['id'] ?? '');
 
         if (empty($event_id) || empty($name) || empty($address) || empty($email) || empty($phone)) {
             return 0;
         }
+
+        $stmt = $this->db->prepare("SELECT * FROM audience where event_id = ?");
+        $stmt->bind_param("i",$event_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+
+        $registered_audience = $result->num_rows;
+
+
+        $stmt = $this->db->prepare("SELECT * FROM events where id = ?");
+        $stmt->bind_param("i",$event_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $stmt->close();
+
+        $audience_capacity =  $row['audience_capacity'];
+
+        if ($registered_audience >= $audience_capacity) {
+            return 2;
+        }
+
 
         if (empty($id)) {
             $stmt = $this->db->prepare("INSERT INTO audience (event_id, name, address, email, phone, status) VALUES (?, ?, ?, ?, ?, ?)");
@@ -213,11 +236,11 @@ class Actions
             }
         } else {
             if ($banner != '') {
-                $stmt = $this->db->prepare("UPDATE events SET name = ?, venue_name = ?, address = ?, schedule = ?, audience_capacity = ?, payment_type = ?, type = ?, attendance_fees = ?, description = ?, banner = ? WHERE id = ?");
-                $stmt->bind_param("ssssisssssi", $name, $venue_name, $address, $schedule, $audience_capacity, $payment_type, $type, $attendance_fees, $description, $banner, $id);
+                $stmt = $this->db->prepare("UPDATE events SET name = ?, venue_name = ?, address = ?, schedule = ?, audience_capacity = ?, payment_type = ?, type = ?, attendance_fees = ?, description = ?, banner = ? WHERE id = ? AND user_id = ?");
+                $stmt->bind_param("ssssisssssii", $name, $venue_name, $address, $schedule, $audience_capacity, $payment_type, $type, $attendance_fees, $description, $banner, $id, $user_id);
             } else {
-                $stmt = $this->db->prepare("UPDATE events SET name = ?, venue_name = ?, address = ?, schedule = ?, audience_capacity = ?, payment_type = ?, type = ?, attendance_fees = ?, description = ? WHERE id = ?");
-                $stmt->bind_param("ssssissssi", $name, $venue_name, $address, $schedule, $audience_capacity, $payment_type, $type, $attendance_fees, $description, $id);
+                $stmt = $this->db->prepare("UPDATE events SET name = ?, venue_name = ?, address = ?, schedule = ?, audience_capacity = ?, payment_type = ?, type = ?, attendance_fees = ?, description = ? WHERE id = ? AND user_id = ?");
+                $stmt->bind_param("ssssissssii", $name, $venue_name, $address, $schedule, $audience_capacity, $payment_type, $type, $attendance_fees, $description, $id, $user_id);
             }
             $save = $stmt->execute();
             $stmt->close();
@@ -232,28 +255,51 @@ class Actions
     private function handle_event_images($id)
     {
         $folder = "../../assets/uploads/event_" . $id;
-        if (is_dir($folder)) {
+    
+        // Create folder if not exists
+        if (!is_dir($folder)) {
+            mkdir($folder, 0755, true);
+        } else {
             $files = scandir($folder);
             foreach ($files as $file) {
                 if (!in_array($file, array('.', '..'))) {
                     unlink($folder . "/" . $file);
                 }
             }
-        } else {
-            mkdir($folder, 0755, true);
         }
-
+    
         if (isset($_POST['img']) && isset($_POST['imgName'])) {
             $imgs = $_POST['img'];
             $imgNames = $_POST['imgName'];
+
+            $allowedTypes = [
+                'image/jpeg' => 'jpg',
+                'image/png' => 'png',
+                'image/gif' => 'gif',
+                'image/webp' => 'webp'
+            ];
+    
             for ($i = 0; $i < count($imgs); $i++) {
                 $imgData = str_replace('data:image/jpeg;base64,', '', $imgs[$i]);
                 $imgData = base64_decode($imgData);
-                $fname = $id . "_" . strtotime(date('Y-m-d H:i')) . "_" . $imgNames[$i];
+    
+                $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                $mimeType = finfo_buffer($finfo, $imgData);
+                finfo_close($finfo);
+    
+                $originalExt = strtolower(pathinfo($imgNames[$i], PATHINFO_EXTENSION));
+    
+                if (!array_key_exists($mimeType, $allowedTypes) || $allowedTypes[$mimeType] !== $originalExt) {
+                    continue;
+                }
+    
+                $fname = $id . "_" . time() . "_" . bin2hex(random_bytes(5)) . "." . $originalExt;
+    
                 file_put_contents($folder . "/" . $fname, $imgData);
             }
         }
     }
+    
 
     // DELETE EVENT
     function delete_event()

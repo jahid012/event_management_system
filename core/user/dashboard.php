@@ -56,8 +56,8 @@
                     <div class="row">
                         <div class="col-md-4">
                             <?php
-                            $event = $conn->query("SELECT COUNT(*) AS total_events FROM events where user_id = " . $_SESSION['login_id']);
-                            $row = $event->fetch_assoc();
+                            $event_count = $conn->query("SELECT COUNT(*) AS total_events FROM events where user_id = " . $_SESSION['login_id']);
+                            $row = $event_count->fetch_assoc();
                             ?>
                             <div class="card text-white bg-primary shadow-lg">
                                 <div class="card-body">
@@ -75,8 +75,8 @@
                         </div>
                         <div class="col-md-4">
                             <?php
-                            $event = $conn->query("SELECT COUNT(a.id) AS total_audience  FROM audience a JOIN events e ON a.event_id = e.id WHERE e.user_id = " . $_SESSION['login_id']);
-                            $row = $event->fetch_assoc();
+                            $audience_count = $conn->query("SELECT COUNT(a.id) AS total_audience  FROM audience a JOIN events e ON a.event_id = e.id WHERE e.user_id = " . $_SESSION['login_id']);
+                            $row = $audience_count->fetch_assoc();
                             ?>
                             <div class="card text-white bg-success shadow-lg">
                                 <div class="card-body">

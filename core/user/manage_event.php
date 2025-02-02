@@ -190,7 +190,7 @@ img#banner-field{
 					<div class=" row form-group">
 						<div class="col-md-5">
 							<label for="" class="control-label">Banner Image</label>
-							<input type="file" class="form-control" name="banner" onchange="displayImg2(this,$(this))" <?php echo isset($banner) ? "" : "required" ?>>
+							<input type="file" class="form-control" name="banner" accept="image/x-png,image/gif,image/jpeg" onchange="displayImg2(this,$(this))" <?php echo isset($banner) ? "" : "required" ?>>
 						</div>
 
 						<div class="col-md-5">

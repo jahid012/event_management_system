@@ -43,12 +43,16 @@
 							<tbody>
 								<?php 
 								$i = 1;
-								$events = $conn->query("SELECT * FROM events where user_id = ".$_SESSION['login_id']." order by id asc");
+								$events = $conn->query("SELECT * FROM events where user_id = ".$_SESSION['login_id']." order by id desc");
+
 								while($row=$events->fetch_assoc()):
 									$trans = get_html_translation_table(HTML_ENTITIES,ENT_QUOTES);
 									unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
 									$desc = strtr(html_entity_decode($row['description']),$trans);
 									$desc=str_replace(array("<li>","</li>"), array("",","), $desc);
+
+								$query = $conn->query("SELECT COUNT(*) AS registered_audience FROM audience where event_id = ".$row['id']);
+								$count = $query->fetch_assoc()
 								?>
 								<tr>
 									<td class="text-center"><?php echo $i++ ?></td>
@@ -63,7 +67,7 @@
 										 <p>Event: <b><?php echo ucwords($row['name']) ?></b></p>
 										 <p><small>Type: <b><?php echo $row['type']  == 1 ? "Public Event" : "Private Event" ?></small></b></p>
 										 <p><small>Fee: <b><?php echo $row['payment_type']  == 1 ? "Free" : number_format($row['attendance_fees'],2) ?></small></b></p>
-										 <p><small>Booked <b><?php echo $row['audience_capacity'] ?></small> <small>of <b><?php echo $row['audience_capacity'] ?></small></b></p>
+										 <p><small>Booked <b><?php echo $count['registered_audience'] ?></small> <small>of <b><?php echo $row['audience_capacity'] ?></small></b></p>
 
 									</td>
 									<td>

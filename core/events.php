@@ -66,40 +66,45 @@ include 'user/db_connect.php';
             unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
             $desc = strtr(html_entity_decode($row['description']), $trans);
             $desc = str_replace(array("<li>", "</li>"), array("", ","), $desc);
+
+            $query = $conn->query("SELECT COUNT(*) AS registered_audience FROM audience where event_id = " . $row['id']);
+            $count = $query->fetch_assoc()
     ?>
-            <div class="card event-list mt-3" data-id="<?php echo $row['id'] ?>">
-                <div class='banner'>
-                    <?php if (!empty($row['banner'])): ?>
-                        <img src="assets/uploads/<?php echo ($row['banner']) ?>" alt="">
-                    <?php endif; ?>
+<div class="card event-list mt-3" data-id="<?php echo $row['id'] ?>">
+    <div class="banner d-none d-sm-block">
+        <?php if (!empty($row['banner'])): ?>
+            <img src="assets/uploads/<?php echo ($row['banner']) ?>" alt="" class="img-fluid rounded-top w-100">
+        <?php endif; ?>
+    </div>
+    <div class="card-body">
+        <div class="row align-items-center justify-content-center p-3">
+            <div class="col-12">
+                <h3 class="text-center text-md-left">
+                    <b class="filter-txt"><?php echo ucwords($row['name']) ?></b>
+                </h3>
+                <div class="text-center text-md-left">
+                    <small>
+                        <p class="mb-2"><b><i class="fa fa-calendar"></i> <?php echo date("F d, Y h:i A", strtotime($row['schedule'])) ?></b></p>
+                    </small>
                 </div>
-                <div class="card-body">
-                    <div class="row align-items-center justify-content-center p-4 h-100">
-                        <div class="">
-                            <h3>
-                                <b class="filter-txt"><?php echo ucwords($row['name']) ?></b>
-                            </h3>
-                            <div>
-                                <small>
-                                    <p><b><i class="fa fa-calendar"></i> <?php echo date("F d, Y h:i A", strtotime($row['schedule'])) ?></b></p>
-                                </small>
-                            </div>
-                            <hr>
-                            <p><b>📍 Venue:</b> <?php echo ucwords($row['venue_name']); ?> <b>📌 Address:</b> <?php echo $row['address']; ?></p>
-                            <p><b>👥 Audience Capacity:</b> <?php echo number_format($row['audience_capacity']); ?> <b>💰 Payment Type:</b>
-                                <?php echo ($row['payment_type'] == 1) ? "Free" : "Payable"; ?>
-                            </p>
-                            <?php if ($row['payment_type'] == 2): ?>
-                                <p><b>🎟️ Attendance Fees:</b> $<?php echo number_format($row['attendance_fees'], 2); ?></p>
-                            <?php endif; ?>
-                            <larger class="filter-txt"><?php echo substr(strip_tags($desc), 0, 200) . '...' ?></larger>
-                            <div class="mt-3">
-                                <button class="btn btn-primary float-right book-event" data-id="<?php echo $row['id'] ?>">Register Now</button>
-                            </div>
-                        </div>
-                    </div>
+                <hr>
+                <p class="mb-1"><b>📍 Venue:</b> <?php echo ucwords($row['venue_name']); ?> <b>📌 Address:</b> <?php echo $row['address']; ?></p>
+                <p><b>👥 Capacity:</b> <?php echo number_format($row['audience_capacity']); ?> Person <b>💰 Payment Type:</b> 
+                    <?php echo ($row['payment_type'] == 1) ? "Free" : "Payable"; ?>
+                    <?php if ($row['payment_type'] == 2): ?>
+                        🎟️ Attendance Fees:</b> $<?php echo number_format($row['attendance_fees'], 2); ?>
+                    <?php endif; ?>
+                </p>
+                <p><b>👥 Registered:</b> <?php echo number_format($count['registered_audience']); ?> Person</p>
+                <p><larger class="filter-txt"><?php echo substr(strip_tags($desc), 0, 150) . '...' ?></larger></p>
+                <div class="text-center text-md-right mt-3">
+                    <button class="btn btn-primary book-event" data-id="<?php echo $row['id'] ?>">Register Now</button>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
 
             <br>
         <?php endwhile; ?>
@@ -135,46 +140,46 @@ include 'user/db_connect.php';
 </div>
 <div class="modal fade" id="uni_modal" role='dialog'>
     <div class="modal-dialog modal-md" role="document">
-      <div class="modal-content">
-        <form action="" id="manage-book">
-          <div class="modal-header">
-            <h5 class="modal-title">Submit Booking Request</h5>
-          </div>
-          <div class="modal-body">
-            <div class="container-fluid">
+        <div class="modal-content">
+            <form action="" id="manage-book">
+                <div class="modal-header">
+                    <h5 class="modal-title">Submit Booking Request</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
 
-              <input type="hidden" class="event_id" name="event_id" value="">
-              <div class="form-group">
-                <label for="" class="control-label">Full Name</label>
-                <input type="text" class="form-control" name="name" value="" required>
-              </div>
-              <div class="form-group">
-                <label for="" class="control-label">Address</label>
-                <textarea cols="30" rows="2" required="" name="address" class="form-control"></textarea>
-              </div>
-              <div class="form-group">
-                <label for="" class="control-label">Email</label>
-                <input type="email" class="form-control" name="email" value="" required>
-              </div>
-              <div class="form-group">
-                <label for="" class="control-label">Phone #</label>
-                <input type="text" class="form-control" name="phone" value="" required>
-              </div>
+                        <input type="hidden" class="event_id" name="event_id" value="">
+                        <div class="form-group">
+                            <label for="" class="control-label">Full Name</label>
+                            <input type="text" class="form-control" name="name" value="" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Address</label>
+                            <textarea cols="30" rows="2" required="" name="address" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Email</label>
+                            <input type="email" class="form-control" name="email" value="" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Phone #</label>
+                            <input type="text" class="form-control" name="phone" value="" required>
+                        </div>
 
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-primary" type="submit" id='submit'>Register</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          </div>
-        </form>
-      </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="submit" id='submit'>Register</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
     </div>
-  </div>
+</div>
 
 <script>
     $('.book-event').click(function() {
-        $('.event_id').val($(this).attr('data-id')) 
+        $('.event_id').val($(this).attr('data-id'))
         start_load()
         $('#uni_modal').modal({
             show: true,
@@ -185,28 +190,41 @@ include 'user/db_connect.php';
         end_load()
 
         $('#manage-book').submit(function(e) {
-        e.preventDefault()
-        start_load()
-        $('#msg').html('')
-        $.ajax({
-            url: 'user/api?action=save_booking',
-            data: new FormData($(this)[0]),
-            cache: false,
-            contentType: false,
-            processData: false,
-            method: 'POST',
-            type: 'POST',
-            success: function(resp) {
-                if (resp == 1) {
-                    alert_toast("Booking Request Sent Successfully.", 'success')
-                    end_load()
-                    $("#uni_modal").modal('toggle');
+            e.preventDefault()
+            start_load()
+            $('#msg').html('')
+            $.ajax({
+                url: 'user/api?action=save_booking',
+                data: new FormData($(this)[0]),
+                cache: false,
+                contentType: false,
+                processData: false,
+                method: 'POST',
+                type: 'POST',
+                success: function(resp) {
+                    if (resp == 0) {
+                        alert_toast("Error while processing your request.", 'warning')
+                        end_load()
+                        $("#uni_modal").modal('toggle');
+                    } else if (resp == 1) {
+                        alert_toast("Booking Request Sent Successfully.", 'success')
+                        end_load()
+                        $("#uni_modal").modal('toggle');
+
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1500);
+
+                    } else if (resp == 2) {
+                        alert_toast("Audience Capacity Exceeded.", 'warning')
+                        end_load()
+                        $("#uni_modal").modal('toggle');
+                    }
                 }
-            }
+            })
         })
     })
-    })
-    
+
 
     $('.banner img').click(function() {
         viewer_modal($(this).attr('src'))
@@ -230,6 +248,4 @@ include 'user/db_connect.php';
         format: 'Y/m/d H:i',
         startDate: '+3d'
     })
-
-
 </script>

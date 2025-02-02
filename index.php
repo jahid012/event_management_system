@@ -20,8 +20,15 @@ include('core/header.php');
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto my-2 my-lg-0">
           <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/">Home</a></li>
-          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="user/register">Register</a></li>
-          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="user/login">Login</a></li>
+          <?php if (isset($_SESSION['login_id'])) { ?>
+
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="user/dashboard">Dashboard</a></li>
+          <?php } else { ?>
+
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="user/register">Register</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="user/login">Login</a></li>
+          <?php } ?>
+
         </ul>
       </div>
     </div>
