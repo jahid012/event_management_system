@@ -1,61 +1,43 @@
-# Event Management System
+# Simple Event Management System
 
-A simple web-based event management system that allows users to create, manage, and view events, as well as register attendees and generate event reports.
+This project is a web-based event management system that allows users to create, manage, and view events, register attendees, and generate event reports.  It's built with Row PHP, HTML, CSS, and Bootstrap.
+
+**Live URL:** The Live URL is available at `https://event.chromesurfer.com`
+
+## Project Overview
+
+This system provides a platform for managing events efficiently.  Users can create new events, update existing ones, view event details, and delete events they manage.  Attendees can register for events, and the system prevents overbooking by enforcing maximum capacity limits.  An event dashboard provides a clear overview of all events, with filtering, sorting, and pagination for easy navigation.  Finally, administrators can download attendee lists in CSV format for reporting purposes.
 
 ## Features
 
-- **User Authentication**: Secure user login and registration with password hashing.
-- **Event Management**: Authenticated users can create, update, view, and delete events with details like name and description.
-- **Attendee Registration**: Users can register for events, with validation to prevent exceeding maximum capacity.
-- **Event Dashboard**: Paginated, sortable, and filterable event list.
-- **Event Reports**: Admins can download attendee lists for specific events in CSV format.
+*   **User Authentication:** Secure user login and registration with password hashing.
+*   **Event Management:** Create, update, view, and delete events with details like name, description, date, time, location, and maximum capacity.
+*   **Attendee Registration:**  Form-based event registration with capacity management.
+*   **Event Dashboard:** Paginated, sortable, and filterable display of events.
+*   **Event Reports:** CSV download of attendee lists for specific events
 
 ## Installation Instructions
 
-### Prerequisites
-- PHP (>=8.0)
-- MySQL
-- Apache/Nginx
-- Composer
-- Node.js & npm (if frontend uses JavaScript frameworks)
-
-### Setup
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-repo/event-management.git
-   cd event-management
+1.  **Clone the Repository On Your Server Or Local Environment:**
+    ```bash
+    git clone [https://github.com/](https://github.com/)[your-username]/[your-repository-name].git
     ```
 
-### Database Setup:
+2.  **Configure Database:**
+        ```
+        Create a database named `event_management` in your MySQL server.
+        Import the SQL file to your database. The file is located at `database` folder.
+        Update the database credentials in the `core/user/db_connect.php` file
+        
+        ```
 
-1. Update database credentials and other necessary configurations
-2. Import the database
-3. Update database credentials and other necessary configurations
+3.  **Access the Application:**
+    Open your web browser and navigate to `http://localhost/` (or the appropriate URL).
 
-Start the development server:
+## Testing Login Credentials
 
-php artisan serve
+For testing purposes, you can use the following credentials:
 
-Testing Credentials
-
-Admin Account
-
-Email: admin@example.com
-
-Password: admin123
-
-User Account
-
-Email: user@example.com
-
-Password: user123
-
-Usage
-
-Sign in with the provided credentials.
-
-Create, edit, and manage events from the dashboard.
-
-Register for available events.
-
-Admins can generate event reports in CSV format.
+*   **User Credentials For Login:**
+    *   Email: `admin@gmail.com`
+    *   Password: `admin`

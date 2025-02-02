@@ -161,10 +161,8 @@ class Actions
         if (empty($id)) {
             $stmt = $this->db->prepare("INSERT INTO audience (event_id, name, address, email, phone, status) VALUES (?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("isssss", $event_id, $name, $address, $email, $phone, $status);
-        } else {
-            $stmt = $this->db->prepare("UPDATE audience SET event_id = ?, name = ?, address = ?, email = ?, phone = ?, status = ? WHERE id = ?");
-            $stmt->bind_param("isssssi", $event_id, $name, $address, $email, $phone, $status, $id);
         }
+        
         $result = $stmt->execute();
         $stmt->close();
         return $result ? 1 : 0;
