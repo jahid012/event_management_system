@@ -17,7 +17,7 @@ This system provides a platform for managing events efficiently.  Users can crea
 ## Features
 
 *   **User Authentication:** Secure user login and registration with password hashing.
-*   **Event Management:** Create, update, view, and delete events with details like name, description, date, time, location, and maximum capacity.
+*   **Event Management:** Create, update, view, and delete events with details like name, description, date, time, address, and maximum capacity.
 *   **Attendee Registration:**  Form-based event registration with capacity management.
 *   **Event Dashboard:** Paginated, sortable, and filterable display of events.
 *   **Event Reports:** CSV download of attendee lists for specific events
@@ -39,3 +39,8 @@ This system provides a platform for managing events efficiently.  Users can crea
 
 3.  **Access the Application:**
     Please navigate to `http://localhost/` **(or the appropriate URL)** to open the project.
+
+Author
+**MD. Jahid Hasan Badhon**
+**+8801795891261**
+**jahid11.bgd@gmail.com**
