@@ -39,7 +39,7 @@ header("location:user/dashboard");
 				</div>
 
 				<button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
-				<p class="mt-2">Don't have an account? <a href="register.php">Register here.</a></p>
+				<p class="mt-2">Don't have an account? <a href="register">Register here.</a></p>
 			</form>
           </div>
         </div>

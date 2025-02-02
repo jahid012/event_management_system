@@ -50,7 +50,7 @@ include('./db_connect.php');
                                     <input type="text" name="address" id="typeAddressX-2" placeholder="Address" class="form-control form-control-lg" required />
                                 </div>
                                 <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" type="submit">Register</button>
-                                <p class="mt-2">Already have an account? <a href="login.php">Login here.</a></p>
+                                <p class="mt-2">Already have an account? <a href="login">Login here.</a></p>
                             </form>
                         </div>
                     </div>
