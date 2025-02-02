@@ -275,6 +275,11 @@ img#banner-field{
 						location.href = "/user/events"
 					},1500)
 
+				}else{
+					alert_toast("Unexpected Error Occurred !",'warning')
+					setTimeout(function(){
+						location.href = "/user/events"
+					},1500)
 				}
 				
 			}
